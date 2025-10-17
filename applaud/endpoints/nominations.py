@@ -10,6 +10,16 @@ from ..schemas.enums import *
 class NominationsEndpoint(Endpoint):
     path = '/v1/nominations'
 
+    class Type(StringEnum):
+        APP_LAUNCH = 'APP_LAUNCH'
+        APP_ENHANCEMENTS = 'APP_ENHANCEMENTS'
+        NEW_CONTENT = 'NEW_CONTENT'
+
+    class State(StringEnum):
+        DRAFT = 'DRAFT'
+        SUBMITTED = 'SUBMITTED'
+        ARCHIVED = 'ARCHIVED'
+
     def fields(self, *, nomination: Union[NominationField, list[NominationField]]=None) -> NominationsEndpoint:
         '''Fields to return for included related types.
 
@@ -30,14 +40,14 @@ class NominationsEndpoint(Endpoint):
         IN_APP_EVENTS = 'inAppEvents'
         SUPPORTED_TERRITORIES = 'supportedTerritories'
 
-    def filter(self, *, type: Union[NominationCategory, list[NominationCategory]]=None, state: Union[NominationState, list[NominationState]], related_apps: Union[str, list[str]]=None) -> NominationsEndpoint:
+    def filter(self, *, type: Union[Type, list[Type]]=None, state: Union[State, list[State]], related_apps: Union[str, list[str]]=None) -> NominationsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param type: filter by attribute 'type'
-        :type type: Union[NominationCategory, list[NominationCategory]] = None
+        :type type: Union[Type, list[Type]] = None
 
         :param state: filter by attribute 'state'
-        :type state: Union[NominationState, list[NominationState]]
+        :type state: Union[State, list[State]]
 
         :param related_apps: filter by id(s) of related 'relatedApps'
         :type related_apps: Union[str, list[str]] = None

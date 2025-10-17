@@ -73,6 +73,11 @@ class InstancesLinkagesOfAnalyticsReportEndpoint(IDEndpoint):
 class InstancesOfAnalyticsReportEndpoint(IDEndpoint):
     path = '/v1/analyticsReports/{id}/instances'
 
+    class Granularity(StringEnum):
+        DAILY = 'DAILY'
+        WEEKLY = 'WEEKLY'
+        MONTHLY = 'MONTHLY'
+
     def fields(self, *, analytics_report_instance: Union[AnalyticsReportInstanceField, list[AnalyticsReportInstanceField]]=None) -> InstancesOfAnalyticsReportEndpoint:
         '''Fields to return for included related types.
 
@@ -85,11 +90,11 @@ class InstancesOfAnalyticsReportEndpoint(IDEndpoint):
         if analytics_report_instance: self._set_fields('analyticsReportInstances',analytics_report_instance if type(analytics_report_instance) is list else [analytics_report_instance])
         return self
         
-    def filter(self, *, granularity: Union[AnalyticsReportGranularity, list[AnalyticsReportGranularity]]=None, processing_date: Union[str, list[str]]=None) -> InstancesOfAnalyticsReportEndpoint:
+    def filter(self, *, granularity: Union[Granularity, list[Granularity]]=None, processing_date: Union[str, list[str]]=None) -> InstancesOfAnalyticsReportEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param granularity: filter by attribute 'granularity'
-        :type granularity: Union[AnalyticsReportGranularity, list[AnalyticsReportGranularity]] = None
+        :type granularity: Union[Granularity, list[Granularity]] = None
 
         :param processing_date: filter by attribute 'processingDate'
         :type processing_date: Union[str, list[str]] = None

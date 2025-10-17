@@ -47,7 +47,10 @@ class BackgroundAssetEndpoint(IDEndpoint):
         return self
         
     class Include(StringEnum):
+        APP = 'app'
+        APP_STORE_VERSION = 'appStoreVersion'
         INTERNAL_BETA_VERSION = 'internalBetaVersion'
+        EXTERNAL_BETA_VERSION = 'externalBetaVersion'
 
     def include(self, relationship: Union[Include, list[Include]]) -> BackgroundAssetEndpoint:
         '''Relationship data to include in the response.
@@ -101,14 +104,53 @@ class VersionsLinkagesOfBackgroundAssetEndpoint(IDEndpoint):
 class VersionsOfBackgroundAssetEndpoint(IDEndpoint):
     path = '/v1/backgroundAssets/{id}/versions'
 
-    def fields(self, *, background_asset_version: Union[BackgroundAssetVersionField, list[BackgroundAssetVersionField]]=None, background_asset_version_internal_beta_release: Union[BackgroundAssetVersionInternalBetaReleaseField, list[BackgroundAssetVersionInternalBetaReleaseField]]=None, background_asset_upload_file: Union[BackgroundAssetUploadFileField, list[BackgroundAssetUploadFileField]]=None) -> VersionsOfBackgroundAssetEndpoint:
+    class State(StringEnum):
+        AWAITING_UPLOAD = 'AWAITING_UPLOAD'
+        PROCESSING = 'PROCESSING'
+        FAILED = 'FAILED'
+        COMPLETE = 'COMPLETE'
+
+    class InternalBetaRelease_state(StringEnum):
+        READY_FOR_TESTING = 'READY_FOR_TESTING'
+        SUPERSEDED = 'SUPERSEDED'
+
+    class ExternalBetaRelease_state(StringEnum):
+        READY_FOR_BETA_SUBMISSION = 'READY_FOR_BETA_SUBMISSION'
+        WAITING_FOR_REVIEW = 'WAITING_FOR_REVIEW'
+        IN_REVIEW = 'IN_REVIEW'
+        REJECTED = 'REJECTED'
+        PROCESSING_FOR_TESTING = 'PROCESSING_FOR_TESTING'
+        READY_FOR_TESTING = 'READY_FOR_TESTING'
+        SUPERSEDED = 'SUPERSEDED'
+
+    class AppStoreRelease_state(StringEnum):
+        PREPARE_FOR_SUBMISSION = 'PREPARE_FOR_SUBMISSION'
+        READY_FOR_REVIEW = 'READY_FOR_REVIEW'
+        WAITING_FOR_REVIEW = 'WAITING_FOR_REVIEW'
+        IN_REVIEW = 'IN_REVIEW'
+        ACCEPTED = 'ACCEPTED'
+        REJECTED = 'REJECTED'
+        PROCESSING_FOR_DISTRIBUTION = 'PROCESSING_FOR_DISTRIBUTION'
+        READY_FOR_DISTRIBUTION = 'READY_FOR_DISTRIBUTION'
+        SUPERSEDED = 'SUPERSEDED'
+
+    def fields(self, *, background_asset_version: Union[BackgroundAssetVersionField, list[BackgroundAssetVersionField]]=None, background_asset: Union[BackgroundAssetField, list[BackgroundAssetField]]=None, background_asset_version_internal_beta_release: Union[BackgroundAssetVersionInternalBetaReleaseField, list[BackgroundAssetVersionInternalBetaReleaseField]]=None, background_asset_version_external_beta_release: Union[BackgroundAssetVersionExternalBetaReleaseField, list[BackgroundAssetVersionExternalBetaReleaseField]]=None, background_asset_version_app_store_release: Union[BackgroundAssetVersionAppStoreReleaseField, list[BackgroundAssetVersionAppStoreReleaseField]]=None, background_asset_upload_file: Union[BackgroundAssetUploadFileField, list[BackgroundAssetUploadFileField]]=None) -> VersionsOfBackgroundAssetEndpoint:
         '''Fields to return for included related types.
 
         :param background_asset_version: the fields to include for returned resources of type backgroundAssetVersions
         :type background_asset_version: Union[BackgroundAssetVersionField, list[BackgroundAssetVersionField]] = None
 
+        :param background_asset: the fields to include for returned resources of type backgroundAssets
+        :type background_asset: Union[BackgroundAssetField, list[BackgroundAssetField]] = None
+
         :param background_asset_version_internal_beta_release: the fields to include for returned resources of type backgroundAssetVersionInternalBetaReleases
         :type background_asset_version_internal_beta_release: Union[BackgroundAssetVersionInternalBetaReleaseField, list[BackgroundAssetVersionInternalBetaReleaseField]] = None
+
+        :param background_asset_version_external_beta_release: the fields to include for returned resources of type backgroundAssetVersionExternalBetaReleases
+        :type background_asset_version_external_beta_release: Union[BackgroundAssetVersionExternalBetaReleaseField, list[BackgroundAssetVersionExternalBetaReleaseField]] = None
+
+        :param background_asset_version_app_store_release: the fields to include for returned resources of type backgroundAssetVersionAppStoreReleases
+        :type background_asset_version_app_store_release: Union[BackgroundAssetVersionAppStoreReleaseField, list[BackgroundAssetVersionAppStoreReleaseField]] = None
 
         :param background_asset_upload_file: the fields to include for returned resources of type backgroundAssetUploadFiles
         :type background_asset_upload_file: Union[BackgroundAssetUploadFileField, list[BackgroundAssetUploadFileField]] = None
@@ -117,26 +159,38 @@ class VersionsOfBackgroundAssetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.VersionsOfBackgroundAssetEndpoint
         '''
         if background_asset_version: self._set_fields('backgroundAssetVersions',background_asset_version if type(background_asset_version) is list else [background_asset_version])
+        if background_asset: self._set_fields('backgroundAssets',background_asset if type(background_asset) is list else [background_asset])
         if background_asset_version_internal_beta_release: self._set_fields('backgroundAssetVersionInternalBetaReleases',background_asset_version_internal_beta_release if type(background_asset_version_internal_beta_release) is list else [background_asset_version_internal_beta_release])
+        if background_asset_version_external_beta_release: self._set_fields('backgroundAssetVersionExternalBetaReleases',background_asset_version_external_beta_release if type(background_asset_version_external_beta_release) is list else [background_asset_version_external_beta_release])
+        if background_asset_version_app_store_release: self._set_fields('backgroundAssetVersionAppStoreReleases',background_asset_version_app_store_release if type(background_asset_version_app_store_release) is list else [background_asset_version_app_store_release])
         if background_asset_upload_file: self._set_fields('backgroundAssetUploadFiles',background_asset_upload_file if type(background_asset_upload_file) is list else [background_asset_upload_file])
         return self
         
     class Include(StringEnum):
+        BACKGROUND_ASSET = 'backgroundAsset'
         INTERNAL_BETA_RELEASE = 'internalBetaRelease'
+        EXTERNAL_BETA_RELEASE = 'externalBetaRelease'
+        APP_STORE_RELEASE = 'appStoreRelease'
         ASSET_FILE = 'assetFile'
         MANIFEST_FILE = 'manifestFile'
 
-    def filter(self, *, state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None, version: Union[str, list[str]]=None, internal_beta_release_state: Union[BetaReviewState, list[BetaReviewState]]=None) -> VersionsOfBackgroundAssetEndpoint:
+    def filter(self, *, state: Union[State, list[State]]=None, version: Union[str, list[str]]=None, internal_beta_release_state: Union[InternalBetaRelease_state, list[InternalBetaRelease_state]]=None, external_beta_release_state: Union[ExternalBetaRelease_state, list[ExternalBetaRelease_state]]=None, app_store_release_state: Union[AppStoreRelease_state, list[AppStoreRelease_state]]=None) -> VersionsOfBackgroundAssetEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param state: filter by attribute 'state'
-        :type state: Union[AppStoreVersionState, list[AppStoreVersionState]] = None
+        :type state: Union[State, list[State]] = None
 
         :param version: filter by attribute 'version'
         :type version: Union[str, list[str]] = None
 
         :param internal_beta_release_state: filter by attribute 'internalBetaRelease.state'
-        :type internal_beta_release_state: Union[BetaReviewState, list[BetaReviewState]] = None
+        :type internal_beta_release_state: Union[InternalBetaRelease_state, list[InternalBetaRelease_state]] = None
+
+        :param external_beta_release_state: filter by attribute 'externalBetaRelease.state'
+        :type external_beta_release_state: Union[ExternalBetaRelease_state, list[ExternalBetaRelease_state]] = None
+
+        :param app_store_release_state: filter by attribute 'appStoreRelease.state'
+        :type app_store_release_state: Union[AppStoreRelease_state, list[AppStoreRelease_state]] = None
 
         :returns: self
         :rtype: applaud.endpoints.VersionsOfBackgroundAssetEndpoint
@@ -146,6 +200,10 @@ class VersionsOfBackgroundAssetEndpoint(IDEndpoint):
         if version: self._set_filter('version', version if type(version) is list else [version])
         
         if internal_beta_release_state: self._set_filter('internalBetaRelease.state', internal_beta_release_state if type(internal_beta_release_state) is list else [internal_beta_release_state])
+        
+        if external_beta_release_state: self._set_filter('externalBetaRelease.state', external_beta_release_state if type(external_beta_release_state) is list else [external_beta_release_state])
+        
+        if app_store_release_state: self._set_filter('appStoreRelease.state', app_store_release_state if type(app_store_release_state) is list else [app_store_release_state])
         
         return self
         

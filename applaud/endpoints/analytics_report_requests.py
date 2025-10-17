@@ -127,6 +127,13 @@ class ReportsLinkagesOfAnalyticsReportRequestEndpoint(IDEndpoint):
 class ReportsOfAnalyticsReportRequestEndpoint(IDEndpoint):
     path = '/v1/analyticsReportRequests/{id}/reports'
 
+    class Category(StringEnum):
+        APP_USAGE = 'APP_USAGE'
+        APP_STORE_ENGAGEMENT = 'APP_STORE_ENGAGEMENT'
+        COMMERCE = 'COMMERCE'
+        FRAMEWORK_USAGE = 'FRAMEWORK_USAGE'
+        PERFORMANCE = 'PERFORMANCE'
+
     def fields(self, *, analytics_report: Union[AnalyticsReportField, list[AnalyticsReportField]]=None) -> ReportsOfAnalyticsReportRequestEndpoint:
         '''Fields to return for included related types.
 
@@ -139,14 +146,14 @@ class ReportsOfAnalyticsReportRequestEndpoint(IDEndpoint):
         if analytics_report: self._set_fields('analyticsReports',analytics_report if type(analytics_report) is list else [analytics_report])
         return self
         
-    def filter(self, *, name: Union[str, list[str]]=None, category: Union[AnalyticsReportCategory, list[AnalyticsReportCategory]]=None) -> ReportsOfAnalyticsReportRequestEndpoint:
+    def filter(self, *, name: Union[str, list[str]]=None, category: Union[Category, list[Category]]=None) -> ReportsOfAnalyticsReportRequestEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param name: filter by attribute 'name'
         :type name: Union[str, list[str]] = None
 
         :param category: filter by attribute 'category'
-        :type category: Union[AnalyticsReportCategory, list[AnalyticsReportCategory]] = None
+        :type category: Union[Category, list[Category]] = None
 
         :returns: self
         :rtype: applaud.endpoints.ReportsOfAnalyticsReportRequestEndpoint

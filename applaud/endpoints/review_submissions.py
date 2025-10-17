@@ -10,6 +10,21 @@ from ..schemas.enums import *
 class ReviewSubmissionsEndpoint(Endpoint):
     path = '/v1/reviewSubmissions'
 
+    class Platform(StringEnum):
+        IOS = 'IOS'
+        MAC_OS = 'MAC_OS'
+        TV_OS = 'TV_OS'
+        VISION_OS = 'VISION_OS'
+
+    class State(StringEnum):
+        READY_FOR_REVIEW = 'READY_FOR_REVIEW'
+        WAITING_FOR_REVIEW = 'WAITING_FOR_REVIEW'
+        IN_REVIEW = 'IN_REVIEW'
+        UNRESOLVED_ISSUES = 'UNRESOLVED_ISSUES'
+        CANCELING = 'CANCELING'
+        COMPLETING = 'COMPLETING'
+        COMPLETE = 'COMPLETE'
+
     def fields(self, *, review_submission: Union[ReviewSubmissionField, list[ReviewSubmissionField]]=None, review_submission_item: Union[ReviewSubmissionItemField, list[ReviewSubmissionItemField]]=None) -> ReviewSubmissionsEndpoint:
         '''Fields to return for included related types.
 
@@ -33,14 +48,14 @@ class ReviewSubmissionsEndpoint(Endpoint):
         SUBMITTED_BY_ACTOR = 'submittedByActor'
         LAST_UPDATED_BY_ACTOR = 'lastUpdatedByActor'
 
-    def filter(self, *, platform: Union[Platform, list[Platform]]=None, state: Union[ReviewSubmissionState, list[ReviewSubmissionState]]=None, app: Union[str, list[str]]) -> ReviewSubmissionsEndpoint:
+    def filter(self, *, platform: Union[Platform, list[Platform]]=None, state: Union[State, list[State]]=None, app: Union[str, list[str]]) -> ReviewSubmissionsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param platform: filter by attribute 'platform'
         :type platform: Union[Platform, list[Platform]] = None
 
         :param state: filter by attribute 'state'
-        :type state: Union[ReviewSubmissionState, list[ReviewSubmissionState]] = None
+        :type state: Union[State, list[State]] = None
 
         :param app: filter by id(s) of related 'app'
         :type app: Union[str, list[str]]
@@ -225,7 +240,7 @@ class ItemsLinkagesOfReviewSubmissionEndpoint(IDEndpoint):
 class ItemsOfReviewSubmissionEndpoint(IDEndpoint):
     path = '/v1/reviewSubmissions/{id}/items'
 
-    def fields(self, *, review_submission_item: Union[ReviewSubmissionItemField, list[ReviewSubmissionItemField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_custom_product_page_version: Union[AppCustomProductPageVersionField, list[AppCustomProductPageVersionField]]=None, app_store_version_experiment: Union[AppStoreVersionExperimentField, list[AppStoreVersionExperimentField]]=None, app_event: Union[AppEventField, list[AppEventField]]=None) -> ItemsOfReviewSubmissionEndpoint:
+    def fields(self, *, review_submission_item: Union[ReviewSubmissionItemField, list[ReviewSubmissionItemField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_custom_product_page_version: Union[AppCustomProductPageVersionField, list[AppCustomProductPageVersionField]]=None, app_store_version_experiment: Union[AppStoreVersionExperimentField, list[AppStoreVersionExperimentField]]=None, app_event: Union[AppEventField, list[AppEventField]]=None, background_asset_version: Union[BackgroundAssetVersionField, list[BackgroundAssetVersionField]]=None) -> ItemsOfReviewSubmissionEndpoint:
         '''Fields to return for included related types.
 
         :param review_submission_item: the fields to include for returned resources of type reviewSubmissionItems
@@ -243,6 +258,9 @@ class ItemsOfReviewSubmissionEndpoint(IDEndpoint):
         :param app_event: the fields to include for returned resources of type appEvents
         :type app_event: Union[AppEventField, list[AppEventField]] = None
 
+        :param background_asset_version: the fields to include for returned resources of type backgroundAssetVersions
+        :type background_asset_version: Union[BackgroundAssetVersionField, list[BackgroundAssetVersionField]] = None
+
         :returns: self
         :rtype: applaud.endpoints.ItemsOfReviewSubmissionEndpoint
         '''
@@ -251,6 +269,7 @@ class ItemsOfReviewSubmissionEndpoint(IDEndpoint):
         if app_custom_product_page_version: self._set_fields('appCustomProductPageVersions',app_custom_product_page_version if type(app_custom_product_page_version) is list else [app_custom_product_page_version])
         if app_store_version_experiment: self._set_fields('appStoreVersionExperiments',app_store_version_experiment if type(app_store_version_experiment) is list else [app_store_version_experiment])
         if app_event: self._set_fields('appEvents',app_event if type(app_event) is list else [app_event])
+        if background_asset_version: self._set_fields('backgroundAssetVersions',background_asset_version if type(background_asset_version) is list else [background_asset_version])
         return self
         
     class Include(StringEnum):
@@ -259,6 +278,7 @@ class ItemsOfReviewSubmissionEndpoint(IDEndpoint):
         APP_STORE_VERSION_EXPERIMENT = 'appStoreVersionExperiment'
         APP_STORE_VERSION_EXPERIMENT_V2 = 'appStoreVersionExperimentV2'
         APP_EVENT = 'appEvent'
+        BACKGROUND_ASSET_VERSION = 'backgroundAssetVersion'
 
     def include(self, relationship: Union[Include, list[Include]]) -> ItemsOfReviewSubmissionEndpoint:
         '''Relationship data to include in the response.

@@ -81,14 +81,14 @@ class SubscriptionOfferCodeOneTimeUseCodeEndpoint(IDEndpoint):
 class ValuesOfSubscriptionOfferCodeOneTimeUseCodeEndpoint(IDEndpoint):
     path = '/v1/subscriptionOfferCodeOneTimeUseCodes/{id}/values'
 
-    def get(self) -> None:
+    def get(self) -> CsvStreamResponse:
         '''Get the resource.
 
         :returns: Single SubscriptionOfferCodeOneTimeUseCodeValue
-        :rtype: None
+        :rtype: CsvStreamResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a error reponse returned.
                  :py:class:`requests.RequestException`: if a connection or a HTTP error occurred.
         '''
         json = super()._perform_get()
-        return None.parse_obj(json)
+        return CsvStreamResponse.parse_obj(json)
 

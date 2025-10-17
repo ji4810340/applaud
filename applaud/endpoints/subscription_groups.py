@@ -246,6 +246,18 @@ class SubscriptionsLinkagesOfSubscriptionGroupEndpoint(IDEndpoint):
 class SubscriptionsOfSubscriptionGroupEndpoint(IDEndpoint):
     path = '/v1/subscriptionGroups/{id}/subscriptions'
 
+    class State(StringEnum):
+        MISSING_METADATA = 'MISSING_METADATA'
+        READY_TO_SUBMIT = 'READY_TO_SUBMIT'
+        WAITING_FOR_REVIEW = 'WAITING_FOR_REVIEW'
+        IN_REVIEW = 'IN_REVIEW'
+        DEVELOPER_ACTION_NEEDED = 'DEVELOPER_ACTION_NEEDED'
+        PENDING_BINARY_APPROVAL = 'PENDING_BINARY_APPROVAL'
+        APPROVED = 'APPROVED'
+        DEVELOPER_REMOVED_FROM_SALE = 'DEVELOPER_REMOVED_FROM_SALE'
+        REMOVED_FROM_SALE = 'REMOVED_FROM_SALE'
+        REJECTED = 'REJECTED'
+
     def fields(self, *, subscription: Union[SubscriptionField, list[SubscriptionField]]=None, subscription_localization: Union[SubscriptionLocalizationField, list[SubscriptionLocalizationField]]=None, subscription_app_store_review_screenshot: Union[SubscriptionAppStoreReviewScreenshotField, list[SubscriptionAppStoreReviewScreenshotField]]=None, subscription_group: Union[SubscriptionGroupField, list[SubscriptionGroupField]]=None, subscription_introductory_offer: Union[SubscriptionIntroductoryOfferField, list[SubscriptionIntroductoryOfferField]]=None, subscription_promotional_offer: Union[SubscriptionPromotionalOfferField, list[SubscriptionPromotionalOfferField]]=None, subscription_offer_code: Union[SubscriptionOfferCodeField, list[SubscriptionOfferCodeField]]=None, subscription_price: Union[SubscriptionPriceField, list[SubscriptionPriceField]]=None, promoted_purchase: Union[PromotedPurchaseField, list[PromotedPurchaseField]]=None, subscription_availability: Union[SubscriptionAvailabilityField, list[SubscriptionAvailabilityField]]=None, win_back_offer: Union[WinBackOfferField, list[WinBackOfferField]]=None, subscription_image: Union[SubscriptionImageField, list[SubscriptionImageField]]=None) -> SubscriptionsOfSubscriptionGroupEndpoint:
         '''Fields to return for included related types.
 
@@ -315,7 +327,7 @@ class SubscriptionsOfSubscriptionGroupEndpoint(IDEndpoint):
         WIN_BACK_OFFERS = 'winBackOffers'
         IMAGES = 'images'
 
-    def filter(self, *, product_id: Union[str, list[str]]=None, name: Union[str, list[str]]=None, state: Union[SubscriptionState, list[SubscriptionState]]=None) -> SubscriptionsOfSubscriptionGroupEndpoint:
+    def filter(self, *, product_id: Union[str, list[str]]=None, name: Union[str, list[str]]=None, state: Union[State, list[State]]=None) -> SubscriptionsOfSubscriptionGroupEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param product_id: filter by attribute 'productId'
@@ -325,7 +337,7 @@ class SubscriptionsOfSubscriptionGroupEndpoint(IDEndpoint):
         :type name: Union[str, list[str]] = None
 
         :param state: filter by attribute 'state'
-        :type state: Union[SubscriptionState, list[SubscriptionState]] = None
+        :type state: Union[State, list[State]] = None
 
         :returns: self
         :rtype: applaud.endpoints.SubscriptionsOfSubscriptionGroupEndpoint

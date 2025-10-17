@@ -120,6 +120,10 @@ class VersionsLinkagesOfAlternativeDistributionPackageEndpoint(IDEndpoint):
 class VersionsOfAlternativeDistributionPackageEndpoint(IDEndpoint):
     path = '/v1/alternativeDistributionPackages/{id}/versions'
 
+    class State(StringEnum):
+        COMPLETED = 'COMPLETED'
+        REPLACED = 'REPLACED'
+
     def fields(self, *, alternative_distribution_package_version: Union[AlternativeDistributionPackageVersionField, list[AlternativeDistributionPackageVersionField]]=None, alternative_distribution_package_variant: Union[AlternativeDistributionPackageVariantField, list[AlternativeDistributionPackageVariantField]]=None, alternative_distribution_package_delta: Union[AlternativeDistributionPackageDeltaField, list[AlternativeDistributionPackageDeltaField]]=None, alternative_distribution_package: Union[AlternativeDistributionPackageField, list[AlternativeDistributionPackageField]]=None) -> VersionsOfAlternativeDistributionPackageEndpoint:
         '''Fields to return for included related types.
 
@@ -149,11 +153,11 @@ class VersionsOfAlternativeDistributionPackageEndpoint(IDEndpoint):
         DELTAS = 'deltas'
         ALTERNATIVE_DISTRIBUTION_PACKAGE = 'alternativeDistributionPackage'
 
-    def filter(self, *, state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None) -> VersionsOfAlternativeDistributionPackageEndpoint:
+    def filter(self, *, state: Union[State, list[State]]=None) -> VersionsOfAlternativeDistributionPackageEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param state: filter by attribute 'state'
-        :type state: Union[AppStoreVersionState, list[AppStoreVersionState]] = None
+        :type state: Union[State, list[State]] = None
 
         :returns: self
         :rtype: applaud.endpoints.VersionsOfAlternativeDistributionPackageEndpoint

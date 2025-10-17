@@ -37,6 +37,7 @@ class MarketplaceWebhooksEndpoint(Endpoint):
         
         return self
 
+    @deprecated
     def get(self) -> MarketplaceWebhooksResponse:
         '''Get one or more resources.
 
@@ -48,6 +49,7 @@ class MarketplaceWebhooksEndpoint(Endpoint):
         json = super()._perform_get()
         return MarketplaceWebhooksResponse.parse_obj(json)
 
+    @deprecated
     def create(self, request: MarketplaceWebhookCreateRequest) -> MarketplaceWebhookResponse:
         '''Create the resource.
 
@@ -64,6 +66,7 @@ class MarketplaceWebhooksEndpoint(Endpoint):
 class MarketplaceWebhookEndpoint(IDEndpoint):
     path = '/v1/marketplaceWebhooks/{id}'
 
+    @deprecated
     def update(self, request: MarketplaceWebhookUpdateRequest) -> MarketplaceWebhookResponse:
         '''Modify the resource.
 

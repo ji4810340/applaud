@@ -121,6 +121,11 @@ class DeliveriesLinkagesOfWebhookEndpoint(IDEndpoint):
 class DeliveriesOfWebhookEndpoint(IDEndpoint):
     path = '/v1/webhooks/{id}/deliveries'
 
+    class DeliveryState(StringEnum):
+        SUCCEEDED = 'SUCCEEDED'
+        FAILED = 'FAILED'
+        PENDING = 'PENDING'
+
     def fields(self, *, webhook_delivery: Union[WebhookDeliveryField, list[WebhookDeliveryField]]=None, webhook_event: Union[WebhookEventField, list[WebhookEventField]]=None) -> DeliveriesOfWebhookEndpoint:
         '''Fields to return for included related types.
 

@@ -148,6 +148,24 @@ class AppPreviewSetsLinkagesOfAppStoreVersionExperimentTreatmentLocalizationEndp
 class AppPreviewSetsOfAppStoreVersionExperimentTreatmentLocalizationEndpoint(IDEndpoint):
     path = '/v1/appStoreVersionExperimentTreatmentLocalizations/{id}/appPreviewSets'
 
+    class PreviewType(StringEnum):
+        IPHONE_67 = 'IPHONE_67'
+        IPHONE_61 = 'IPHONE_61'
+        IPHONE_65 = 'IPHONE_65'
+        IPHONE_58 = 'IPHONE_58'
+        IPHONE_55 = 'IPHONE_55'
+        IPHONE_47 = 'IPHONE_47'
+        IPHONE_40 = 'IPHONE_40'
+        IPHONE_35 = 'IPHONE_35'
+        IPAD_PRO_3GEN_129 = 'IPAD_PRO_3GEN_129'
+        IPAD_PRO_3GEN_11 = 'IPAD_PRO_3GEN_11'
+        IPAD_PRO_129 = 'IPAD_PRO_129'
+        IPAD_105 = 'IPAD_105'
+        IPAD_97 = 'IPAD_97'
+        DESKTOP = 'DESKTOP'
+        APPLE_TV = 'APPLE_TV'
+        APPLE_VISION_PRO = 'APPLE_VISION_PRO'
+
     def fields(self, *, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None, app_custom_product_page_localization: Union[AppCustomProductPageLocalizationField, list[AppCustomProductPageLocalizationField]]=None, app_store_version_experiment_treatment_localization: Union[AppStoreVersionExperimentTreatmentLocalizationField, list[AppStoreVersionExperimentTreatmentLocalizationField]]=None, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None) -> AppPreviewSetsOfAppStoreVersionExperimentTreatmentLocalizationEndpoint:
         '''Fields to return for included related types.
 
@@ -278,6 +296,41 @@ class AppScreenshotSetsLinkagesOfAppStoreVersionExperimentTreatmentLocalizationE
 
 class AppScreenshotSetsOfAppStoreVersionExperimentTreatmentLocalizationEndpoint(IDEndpoint):
     path = '/v1/appStoreVersionExperimentTreatmentLocalizations/{id}/appScreenshotSets'
+
+    class ScreenshotDisplayType(StringEnum):
+        APP_IPHONE_67 = 'APP_IPHONE_67'
+        APP_IPHONE_61 = 'APP_IPHONE_61'
+        APP_IPHONE_65 = 'APP_IPHONE_65'
+        APP_IPHONE_58 = 'APP_IPHONE_58'
+        APP_IPHONE_55 = 'APP_IPHONE_55'
+        APP_IPHONE_47 = 'APP_IPHONE_47'
+        APP_IPHONE_40 = 'APP_IPHONE_40'
+        APP_IPHONE_35 = 'APP_IPHONE_35'
+        APP_IPAD_PRO_3GEN_129 = 'APP_IPAD_PRO_3GEN_129'
+        APP_IPAD_PRO_3GEN_11 = 'APP_IPAD_PRO_3GEN_11'
+        APP_IPAD_PRO_129 = 'APP_IPAD_PRO_129'
+        APP_IPAD_105 = 'APP_IPAD_105'
+        APP_IPAD_97 = 'APP_IPAD_97'
+        APP_DESKTOP = 'APP_DESKTOP'
+        APP_WATCH_ULTRA = 'APP_WATCH_ULTRA'
+        APP_WATCH_SERIES_10 = 'APP_WATCH_SERIES_10'
+        APP_WATCH_SERIES_7 = 'APP_WATCH_SERIES_7'
+        APP_WATCH_SERIES_4 = 'APP_WATCH_SERIES_4'
+        APP_WATCH_SERIES_3 = 'APP_WATCH_SERIES_3'
+        APP_APPLE_TV = 'APP_APPLE_TV'
+        APP_APPLE_VISION_PRO = 'APP_APPLE_VISION_PRO'
+        IMESSAGE_APP_IPHONE_67 = 'IMESSAGE_APP_IPHONE_67'
+        IMESSAGE_APP_IPHONE_61 = 'IMESSAGE_APP_IPHONE_61'
+        IMESSAGE_APP_IPHONE_65 = 'IMESSAGE_APP_IPHONE_65'
+        IMESSAGE_APP_IPHONE_58 = 'IMESSAGE_APP_IPHONE_58'
+        IMESSAGE_APP_IPHONE_55 = 'IMESSAGE_APP_IPHONE_55'
+        IMESSAGE_APP_IPHONE_47 = 'IMESSAGE_APP_IPHONE_47'
+        IMESSAGE_APP_IPHONE_40 = 'IMESSAGE_APP_IPHONE_40'
+        IMESSAGE_APP_IPAD_PRO_3GEN_129 = 'IMESSAGE_APP_IPAD_PRO_3GEN_129'
+        IMESSAGE_APP_IPAD_PRO_3GEN_11 = 'IMESSAGE_APP_IPAD_PRO_3GEN_11'
+        IMESSAGE_APP_IPAD_PRO_129 = 'IMESSAGE_APP_IPAD_PRO_129'
+        IMESSAGE_APP_IPAD_105 = 'IMESSAGE_APP_IPAD_105'
+        IMESSAGE_APP_IPAD_97 = 'IMESSAGE_APP_IPAD_97'
 
     def fields(self, *, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None, app_custom_product_page_localization: Union[AppCustomProductPageLocalizationField, list[AppCustomProductPageLocalizationField]]=None, app_store_version_experiment_treatment_localization: Union[AppStoreVersionExperimentTreatmentLocalizationField, list[AppStoreVersionExperimentTreatmentLocalizationField]]=None, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotSetsOfAppStoreVersionExperimentTreatmentLocalizationEndpoint:
         '''Fields to return for included related types.

@@ -134,7 +134,7 @@ class AppCustomProductPageLocalizationsLinkagesOfAppCustomProductPageVersionEndp
 class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDEndpoint):
     path = '/v1/appCustomProductPageVersions/{id}/appCustomProductPageLocalizations'
 
-    def fields(self, *, app_custom_product_page_localization: Union[AppCustomProductPageLocalizationField, list[AppCustomProductPageLocalizationField]]=None, app_custom_product_page_version: Union[AppCustomProductPageVersionField, list[AppCustomProductPageVersionField]]=None, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None) -> AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint:
+    def fields(self, *, app_custom_product_page_localization: Union[AppCustomProductPageLocalizationField, list[AppCustomProductPageLocalizationField]]=None, app_custom_product_page_version: Union[AppCustomProductPageVersionField, list[AppCustomProductPageVersionField]]=None, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None, app_keyword: Union[AppKeywordField, list[AppKeywordField]]=None) -> AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint:
         '''Fields to return for included related types.
 
         :param app_custom_product_page_localization: the fields to include for returned resources of type appCustomProductPageLocalizations
@@ -149,6 +149,9 @@ class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDE
         :param app_preview_set: the fields to include for returned resources of type appPreviewSets
         :type app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]] = None
 
+        :param app_keyword: the fields to include for returned resources of type appKeywords
+        :type app_keyword: Union[AppKeywordField, list[AppKeywordField]] = None
+
         :returns: self
         :rtype: applaud.endpoints.AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint
         '''
@@ -156,12 +159,14 @@ class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDE
         if app_custom_product_page_version: self._set_fields('appCustomProductPageVersions',app_custom_product_page_version if type(app_custom_product_page_version) is list else [app_custom_product_page_version])
         if app_screenshot_set: self._set_fields('appScreenshotSets',app_screenshot_set if type(app_screenshot_set) is list else [app_screenshot_set])
         if app_preview_set: self._set_fields('appPreviewSets',app_preview_set if type(app_preview_set) is list else [app_preview_set])
+        if app_keyword: self._set_fields('appKeywords',app_keyword if type(app_keyword) is list else [app_keyword])
         return self
         
     class Include(StringEnum):
         APP_CUSTOM_PRODUCT_PAGE_VERSION = 'appCustomProductPageVersion'
         APP_SCREENSHOT_SETS = 'appScreenshotSets'
         APP_PREVIEW_SETS = 'appPreviewSets'
+        SEARCH_KEYWORDS = 'searchKeywords'
 
     def filter(self, *, locale: Union[str, list[str]]=None) -> AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
@@ -185,7 +190,7 @@ class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDE
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_screenshot_sets: int=None, app_preview_sets: int=None) -> AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint:
+    def limit(self, number: int=None, *, app_screenshot_sets: int=None, app_preview_sets: int=None, search_keywords: int=None) -> AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -196,6 +201,9 @@ class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDE
 
         :param app_preview_sets: maximum number of related appPreviewSets returned (when they are included). The maximum limit is 50
         :type app_preview_sets: int = None
+
+        :param search_keywords: maximum number of related searchKeywords returned (when they are included). The maximum limit is 50
+        :type search_keywords: int = None
 
         :returns: self
         :rtype: applaud.endpoints.AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint
@@ -211,6 +219,10 @@ class AppCustomProductPageLocalizationsOfAppCustomProductPageVersionEndpoint(IDE
         if app_preview_sets and app_preview_sets > 50:
             raise ValueError(f'The maximum limit of app_preview_sets is 50')
         if app_preview_sets: self._set_limit(app_preview_sets, 'appPreviewSets')
+
+        if search_keywords and search_keywords > 50:
+            raise ValueError(f'The maximum limit of search_keywords is 50')
+        if search_keywords: self._set_limit(search_keywords, 'searchKeywords')
 
         return self
 

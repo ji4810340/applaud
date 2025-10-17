@@ -47,7 +47,10 @@ class BackgroundAssetVersionEndpoint(IDEndpoint):
         return self
         
     class Include(StringEnum):
+        BACKGROUND_ASSET = 'backgroundAsset'
         INTERNAL_BETA_RELEASE = 'internalBetaRelease'
+        EXTERNAL_BETA_RELEASE = 'externalBetaRelease'
+        APP_STORE_RELEASE = 'appStoreRelease'
         ASSET_FILE = 'assetFile'
         MANIFEST_FILE = 'manifestFile'
 

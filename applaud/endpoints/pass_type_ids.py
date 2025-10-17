@@ -235,6 +235,26 @@ class CertificatesLinkagesOfPassTypeIdEndpoint(IDEndpoint):
 class CertificatesOfPassTypeIdEndpoint(IDEndpoint):
     path = '/v1/passTypeIds/{id}/certificates'
 
+    class CertificateType(StringEnum):
+        APPLE_PAY = 'APPLE_PAY'
+        APPLE_PAY_MERCHANT_IDENTITY = 'APPLE_PAY_MERCHANT_IDENTITY'
+        APPLE_PAY_PSP_IDENTITY = 'APPLE_PAY_PSP_IDENTITY'
+        APPLE_PAY_RSA = 'APPLE_PAY_RSA'
+        DEVELOPER_ID_KEXT = 'DEVELOPER_ID_KEXT'
+        DEVELOPER_ID_KEXT_G2 = 'DEVELOPER_ID_KEXT_G2'
+        DEVELOPER_ID_APPLICATION = 'DEVELOPER_ID_APPLICATION'
+        DEVELOPER_ID_APPLICATION_G2 = 'DEVELOPER_ID_APPLICATION_G2'
+        DEVELOPMENT = 'DEVELOPMENT'
+        DISTRIBUTION = 'DISTRIBUTION'
+        IDENTITY_ACCESS = 'IDENTITY_ACCESS'
+        IOS_DEVELOPMENT = 'IOS_DEVELOPMENT'
+        IOS_DISTRIBUTION = 'IOS_DISTRIBUTION'
+        MAC_APP_DISTRIBUTION = 'MAC_APP_DISTRIBUTION'
+        MAC_INSTALLER_DISTRIBUTION = 'MAC_INSTALLER_DISTRIBUTION'
+        MAC_APP_DEVELOPMENT = 'MAC_APP_DEVELOPMENT'
+        PASS_TYPE_ID = 'PASS_TYPE_ID'
+        PASS_TYPE_ID_WITH_NFC = 'PASS_TYPE_ID_WITH_NFC'
+
     def fields(self, *, certificate: Union[CertificateField, list[CertificateField]]=None, pass_type_id: Union[PassTypeIdField, list[PassTypeIdField]]=None) -> CertificatesOfPassTypeIdEndpoint:
         '''Fields to return for included related types.
 

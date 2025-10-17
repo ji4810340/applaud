@@ -141,6 +141,16 @@ class AppCustomProductPageVersionsLinkagesOfAppCustomProductPageEndpoint(IDEndpo
 class AppCustomProductPageVersionsOfAppCustomProductPageEndpoint(IDEndpoint):
     path = '/v1/appCustomProductPages/{id}/appCustomProductPageVersions'
 
+    class State(StringEnum):
+        PREPARE_FOR_SUBMISSION = 'PREPARE_FOR_SUBMISSION'
+        READY_FOR_REVIEW = 'READY_FOR_REVIEW'
+        WAITING_FOR_REVIEW = 'WAITING_FOR_REVIEW'
+        IN_REVIEW = 'IN_REVIEW'
+        ACCEPTED = 'ACCEPTED'
+        APPROVED = 'APPROVED'
+        REPLACED_WITH_NEW_VERSION = 'REPLACED_WITH_NEW_VERSION'
+        REJECTED = 'REJECTED'
+
     def fields(self, *, app_custom_product_page_version: Union[AppCustomProductPageVersionField, list[AppCustomProductPageVersionField]]=None, app_custom_product_page: Union[AppCustomProductPageField, list[AppCustomProductPageField]]=None, app_custom_product_page_localization: Union[AppCustomProductPageLocalizationField, list[AppCustomProductPageLocalizationField]]=None) -> AppCustomProductPageVersionsOfAppCustomProductPageEndpoint:
         '''Fields to return for included related types.
 
@@ -165,11 +175,11 @@ class AppCustomProductPageVersionsOfAppCustomProductPageEndpoint(IDEndpoint):
         APP_CUSTOM_PRODUCT_PAGE = 'appCustomProductPage'
         APP_CUSTOM_PRODUCT_PAGE_LOCALIZATIONS = 'appCustomProductPageLocalizations'
 
-    def filter(self, *, state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None) -> AppCustomProductPageVersionsOfAppCustomProductPageEndpoint:
+    def filter(self, *, state: Union[State, list[State]]=None) -> AppCustomProductPageVersionsOfAppCustomProductPageEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param state: filter by attribute 'state'
-        :type state: Union[AppStoreVersionState, list[AppStoreVersionState]] = None
+        :type state: Union[State, list[State]] = None
 
         :returns: self
         :rtype: applaud.endpoints.AppCustomProductPageVersionsOfAppCustomProductPageEndpoint
