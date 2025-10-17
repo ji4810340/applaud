@@ -482,17 +482,17 @@ class AppStoreVersionExperimentTreatmentField(StringEnum):
 
 class AppStoreVersionExperimentField(StringEnum):
     NAME = 'name'
+    APP_STORE_VERSION_EXPERIMENT_TREATMENTS = 'appStoreVersionExperimentTreatments'
+    APP = 'app'
+    APP_STORE_VERSION = 'appStoreVersion'
+    STATE = 'state'
+    CONTROL_VERSIONS = 'controlVersions'
+    REVIEW_REQUIRED = 'reviewRequired'
+    LATEST_CONTROL_VERSION = 'latestControlVersion'
     PLATFORM = 'platform'
     TRAFFIC_PROPORTION = 'trafficProportion'
-    STATE = 'state'
-    REVIEW_REQUIRED = 'reviewRequired'
     START_DATE = 'startDate'
     END_DATE = 'endDate'
-    APP = 'app'
-    LATEST_CONTROL_VERSION = 'latestControlVersion'
-    CONTROL_VERSIONS = 'controlVersions'
-    APP_STORE_VERSION_EXPERIMENT_TREATMENTS = 'appStoreVersionExperimentTreatments'
-    APP_STORE_VERSION = 'appStoreVersion'
 
 class AppStoreVersionLocalizationField(StringEnum):
     DESCRIPTION = 'description'
@@ -623,22 +623,22 @@ class EndUserLicenseAgreementField(StringEnum):
     TERRITORIES = 'territories'
 
 class InAppPurchaseField(StringEnum):
-    REFERENCE_NAME = 'referenceName'
-    PRODUCT_ID = 'productId'
-    IN_APP_PURCHASE_TYPE = 'inAppPurchaseType'
-    STATE = 'state'
-    APPS = 'apps'
     NAME = 'name'
     REVIEW_NOTE = 'reviewNote'
-    FAMILY_SHARABLE = 'familySharable'
-    CONTENT_HOSTING = 'contentHosting'
-    IN_APP_PURCHASE_LOCALIZATIONS = 'inAppPurchaseLocalizations'
-    PRICE_POINTS = 'pricePoints'
-    CONTENT = 'content'
     APP_STORE_REVIEW_SCREENSHOT = 'appStoreReviewScreenshot'
-    PROMOTED_PURCHASE = 'promotedPurchase'
-    IAP_PRICE_SCHEDULE = 'iapPriceSchedule'
+    REFERENCE_NAME = 'referenceName'
+    PRODUCT_ID = 'productId'
     IN_APP_PURCHASE_AVAILABILITY = 'inAppPurchaseAvailability'
+    FAMILY_SHARABLE = 'familySharable'
+    IN_APP_PURCHASE_LOCALIZATIONS = 'inAppPurchaseLocalizations'
+    CONTENT_HOSTING = 'contentHosting'
+    IAP_PRICE_SCHEDULE = 'iapPriceSchedule'
+    STATE = 'state'
+    PRICE_POINTS = 'pricePoints'
+    IN_APP_PURCHASE_TYPE = 'inAppPurchaseType'
+    APPS = 'apps'
+    CONTENT = 'content'
+    PROMOTED_PURCHASE = 'promotedPurchase'
     IMAGES = 'images'
 
 class SubscriptionGroupField(StringEnum):
@@ -1569,7 +1569,6 @@ class AppClipAdvancedExperienceLocalizationField(StringEnum):
     SUBTITLE = 'subtitle'
 
 class AppKeywordField(StringEnum):
-    pass
 
 class TerritoryAgeRatingField(StringEnum):
     APP_STORE_AGE_RATING = 'appStoreAgeRating'
